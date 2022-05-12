@@ -1,3 +1,5 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,10 +18,38 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Home(),
+      home: const SplashScreen(),
     );
   }
 }
+
+class SplashScreen  extends StatelessWidget {
+  const SplashScreen ({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedSplashScreen(
+      splash: Column(
+        children: [
+          Image.asset('assets/images/Logo.png'),
+          const Text('Playground app', style: TextStyle(
+            fontSize: 40,
+            fontWeight: FontWeight.bold,
+            color: Colors.white),
+            ),
+        ],
+      ),
+      backgroundColor: Colors.red,
+      nextScreen:const Home(),
+      splashIconSize: 298,
+      duration: 3000,
+      splashTransition: SplashTransition.sizeTransition,
+      pageTransitionType: PageTransitionType.leftToRightWithFade,
+      animationDuration: const Duration(seconds: 1),
+    );
+  }
+}
+
 
 class Home extends StatelessWidget {
 const Home({ Key? key }) : super(key: key);
